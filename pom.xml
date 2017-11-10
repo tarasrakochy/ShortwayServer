@@ -7,17 +7,31 @@
     <groupId>com.taras.shortway.server</groupId>
     <artifactId>com.taras.shortway.server</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
-        <spring.version>4.3.12.RELEASE</spring.version>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+
+        <spring.version>4.2.2.RELEASE</spring.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-        <spring-data-jpa.version>2.0.1.RELEASE</spring-data-jpa.version>
-        <hibernate-entitymanager.version>5.2.11.Final</hibernate-entitymanager.version>
+        <spring-data-jpa.version>1.9.2.RELEASE</spring-data-jpa.version>
         <postgresql.version>42.1.4</postgresql.version>
         <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
         <jta.version>1.1</jta.version>
-        <lombok-maven.version>1.16.18.1</lombok-maven.version>
         <lombok.version>1.16.18</lombok.version>
+        <hibernate-entitymanager.version>5.0.2.Final</hibernate-entitymanager.version>
     </properties>
 
     <packaging>war</packaging>
