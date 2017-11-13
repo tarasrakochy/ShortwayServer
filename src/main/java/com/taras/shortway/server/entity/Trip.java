@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//@Entity
-//@Table(name = "trip3")
+@Entity
+@Table(name = "trips")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,23 +19,28 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String from;
-    private String to;
-//    private Date date;
-//    private Date time;
 
-//    @ManyToMany
-//    @JoinTable(name = "user_trip",
-//            joinColumns = @JoinColumn(name = "trip_id"),
-//            inverseJoinColumns = @JoinColumn(name = "passanger_id")
-//    )
-//    private List<User> passangers = new ArrayList<>();
+    private String fromPoint;
+    private String toPoint;
 
-//    @OneToOne
-//    private User driver;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
-//    @ElementCollection
-//    @CollectionTable(name = "transitional")
-//    @Column(name = "point")
-//    private List<String> transitionals = new ArrayList<>();
+    @Temporal(TemporalType.TIME)
+    private Date time;
+
+    @ManyToMany
+    @JoinTable(name = "user_trip",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = @JoinColumn(name = "passanger_id")
+    )
+    private List<User> passangers = new ArrayList<>();
+
+    @OneToOne
+    private User driver;
+
+    @ElementCollection
+    @CollectionTable(name = "transitional")
+    @Column(name = "point")
+    private List<String> transitionals = new ArrayList<>();
 }

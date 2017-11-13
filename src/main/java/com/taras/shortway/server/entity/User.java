@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//@Table(name = "user1")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,6 +34,6 @@ public class User {
     @OneToOne
     private UserInfo userInfo;
 
-//    @ManyToMany(mappedBy = "passangers")
-//    private List<Trip> trips = new ArrayList<>();
+    @ManyToMany(mappedBy = "passangers")
+    private List<Trip> trips = new ArrayList<>();
 }
