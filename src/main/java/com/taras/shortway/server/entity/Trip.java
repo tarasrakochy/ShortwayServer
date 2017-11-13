@@ -36,7 +36,7 @@ public class Trip {
     )
     private List<User> passangers = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private User driver;
 
     @ElementCollection

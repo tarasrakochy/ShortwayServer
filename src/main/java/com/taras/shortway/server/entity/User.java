@@ -25,13 +25,13 @@ public class User {
     private String phone;
     private String email;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private LoginPass loginPass;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Auto auto;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private UserInfo userInfo;
 
     @ManyToMany(mappedBy = "passangers")

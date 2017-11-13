@@ -8,6 +8,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ApplicationInitializer implements WebApplicationInitializer {
 
