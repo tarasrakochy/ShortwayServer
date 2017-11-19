@@ -1,5 +1,7 @@
 package com.taras.shortway.server.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.taras.shortway.server.customserializers.CustomUsersListSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,17 +31,18 @@ public class Trip {
     @Temporal(TemporalType.TIME)
     private Date time;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_trip",
             joinColumns = @JoinColumn(name = "trip_id"),
             inverseJoinColumns = @JoinColumn(name = "passanger_id")
     )
+    @JsonSerialize(using = CustomUsersListSerializer.class)
     private List<User> passangers = new ArrayList<>();
 
     @OneToOne
     private User driver;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "transitional")
     @Column(name = "point")
     private List<String> transitionals = new ArrayList<>();
