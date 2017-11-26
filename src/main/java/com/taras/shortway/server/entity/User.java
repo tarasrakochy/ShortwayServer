@@ -36,7 +36,7 @@ public class User {
     @OneToOne
     private UserInfo userInfo;
 
-    @ManyToMany(mappedBy = "passangers", fetch = FetchType.EAGER)
-    @JsonSerialize(using = CustomTripsListSerializer.class)
-    private List<Trip> trips = new ArrayList<>();
+//    @ManyToMany(mappedBy = "passangers", fetch = FetchType.EAGER)
+//    @JsonSerialize(using = CustomTripsListSerializer.class)
+//    private List<Trip> trips = new ArrayList<>();
 }

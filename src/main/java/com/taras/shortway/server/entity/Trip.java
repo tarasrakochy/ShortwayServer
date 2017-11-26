@@ -31,16 +31,13 @@ public class Trip {
     @Temporal(TemporalType.TIME)
     private Date time;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_trip",
-            joinColumns = @JoinColumn(name = "trip_id"),
-            inverseJoinColumns = @JoinColumn(name = "passanger_id")
-    )
-    @JsonSerialize(using = CustomUsersListSerializer.class)
-    private List<User> passangers = new ArrayList<>();
-
-    @OneToOne
-    private User driver;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_trip",
+//            joinColumns = @JoinColumn(name = "trip_id"),
+//            inverseJoinColumns = @JoinColumn(name = "passanger_id")
+//    )
+//    @JsonSerialize(using = CustomUsersListSerializer.class)
+//    private List<User> passangers = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "transitional")
