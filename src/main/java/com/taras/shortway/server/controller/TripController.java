@@ -1,6 +1,7 @@
 package com.taras.shortway.server.controller;
 
 import com.taras.shortway.server.entity.Trip;
+import com.taras.shortway.server.entity.User;
 import com.taras.shortway.server.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,4 +27,15 @@ public class TripController {
     public List<Trip> getTrips() {
         return tripService.getTrips();
     }
+
+    @RequestMapping(value = "/trips/{id}/passengers")
+    public List<User> getPassengersForTrip(@PathVariable int id) {
+        return tripService.getPassengersForTrip(id);
+    }
+
+    @RequestMapping(value = "/trips/{id}/driver")
+    public User getDriverForTrip(@PathVariable int id) {
+        return tripService.getDriverForTrip(id);
+    }
+
 }

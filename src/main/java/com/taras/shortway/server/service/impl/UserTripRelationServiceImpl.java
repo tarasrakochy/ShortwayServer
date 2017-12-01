@@ -1,6 +1,7 @@
 package com.taras.shortway.server.service.impl;
 
 import com.taras.shortway.server.entity.Trip;
+import com.taras.shortway.server.entity.User;
 import com.taras.shortway.server.entity.UserTripRelation;
 import com.taras.shortway.server.entity.enums.UserStatus;
 import com.taras.shortway.server.repository.UserTripRelationRepository;
@@ -31,5 +32,31 @@ public class UserTripRelationServiceImpl implements UserTripRelationService {
             trips.add(userTripRelation.getTrip());
         }
         return trips;
+    }
+
+    @Override
+    public List<User> getPassengersForTrip(int id) {
+        final List<UserTripRelation> relations = userTripRelationRepository.findAll();
+        final List<UserTripRelation> relationsWithTrip = relations
+                .stream()
+                .filter(r -> r.getTrip().getId() == id)
+                .filter(r -> r.getUserStatus() == UserStatus.PASSENGER)
+                .collect(Collectors.toList());
+        List<User> users = new ArrayList<>();
+        for (UserTripRelation userTripRelation : relationsWithTrip) {
+            users.add(userTripRelation.getUser());
+        }
+        return users;
+    }
+
+    @Override
+    public User getDriverForTrip(int id) {
+        final List<UserTripRelation> relations = userTripRelationRepository.findAll();
+        for (UserTripRelation relation : relations) {
+            if (relation.getTrip().getId() == id && relation.getUserStatus() == UserStatus.DRIVER) {
+                return relation.getUser();
+            }
+        }
+        return null;
     }
 }
