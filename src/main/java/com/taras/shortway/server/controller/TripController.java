@@ -28,12 +28,12 @@ public class TripController {
         return tripService.getTrips();
     }
 
-    @RequestMapping(value = "/trips/{id}/passengers")
+    @RequestMapping(value = "/{id}/passengers", method = RequestMethod.GET)
     public List<User> getPassengersForTrip(@PathVariable int id) {
         return tripService.getPassengersForTrip(id);
     }
 
-    @RequestMapping(value = "/trips/{id}/driver")
+    @RequestMapping(value = "/{id}/driver", method = RequestMethod.GET)
     public User getDriverForTrip(@PathVariable int id) {
         return tripService.getDriverForTrip(id);
     }
