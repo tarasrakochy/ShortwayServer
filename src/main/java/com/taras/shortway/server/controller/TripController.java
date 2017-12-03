@@ -40,4 +40,14 @@ public class TripController {
         return tripService.getTripsForCondition(trip);
     }
 
+    @RequestMapping(value = "/newtrip", method = RequestMethod.POST)
+    public boolean addTrip(@RequestBody Trip trip, @RequestParam int userId) {
+        return tripService.addTrip(trip, userId);
+    }
+
+    @RequestMapping(value = "/{id}/accept", method = RequestMethod.PUT)
+    public boolean acceptTrip(@RequestParam int userId, @PathVariable int id, @RequestParam String fromPoint, @RequestParam String toPoint) {
+        return tripService.acceptTrip(userId, id, fromPoint, toPoint);
+    }
+
 }

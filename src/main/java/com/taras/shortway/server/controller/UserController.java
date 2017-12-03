@@ -29,4 +29,14 @@ public class UserController {
     public List<Trip> getTripsForUser(@PathVariable int id, @RequestParam boolean isDriver) {
         return userService.getTripsForUser(id, isDriver);
     }
+
+    @RequestMapping(value = "/newuser", method=RequestMethod.POST)
+    public boolean addUser(@RequestBody User user) {
+        return userService.addUser(user);
+    }
+
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.PUT)
+    public boolean editUser(@RequestBody User user) {
+        return userService.editUser(user);
+    }
 }

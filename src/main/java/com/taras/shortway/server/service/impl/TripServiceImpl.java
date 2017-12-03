@@ -59,6 +59,17 @@ public class TripServiceImpl implements TripService {
         return getSuitableTrips(tripsAfterCurrentData, trip);
     }
 
+    @Override
+    public boolean addTrip(Trip trip, int userId) {
+        return userTripRelationService.addTrip(trip, userId);
+    }
+
+    @Override
+    public boolean acceptTrip(int userId, int tripId, String fromPoint, String toPoint) {
+        return userTripRelationService.acceptTrip(userId, tripId, fromPoint, toPoint);
+    }
+
+
     private List<Trip> getSuitableTrips(List<Trip> tripsAfterCurrentData, Trip conditionTrip) {
 
         List<Trip> suitableTrips = new ArrayList<>();

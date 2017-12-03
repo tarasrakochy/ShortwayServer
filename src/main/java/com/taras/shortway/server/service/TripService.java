@@ -15,4 +15,8 @@ public interface TripService {
     User getDriverForTrip(int id);
 
     List<Trip> getTripsForCondition(Trip trip);
+
+    boolean addTrip(Trip trip, int userId);
+
+    boolean acceptTrip(int userId, int tripId, String fromPoint, String toPoint);
 }

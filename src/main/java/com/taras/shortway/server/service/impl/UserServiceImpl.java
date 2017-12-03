@@ -4,6 +4,7 @@ import com.taras.shortway.server.entity.LoginPass;
 import com.taras.shortway.server.entity.Trip;
 import com.taras.shortway.server.entity.User;
 import com.taras.shortway.server.repository.UserRepository;
+import com.taras.shortway.server.service.UserInfoService;
 import com.taras.shortway.server.service.UserService;
 import com.taras.shortway.server.service.UserTripRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserTripRelationService userTripRelationService;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     @Override
     public User getUserByLoginAndPass(String login, String password) {
@@ -46,5 +50,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Trip> getTripsForUser(int id, boolean isDriver) {
         return userTripRelationService.getTripsForUser(id, isDriver);
+    }
+
+    @Override
+    public boolean addUser(User user) {
+        User newUser = userRepository.saveAndFlush(user);
+        return newUser.getId() != 0;
+    }
+
+    @Override
+    public boolean editUser(User user) {
+        User editUser = userRepository.saveAndFlush(user);
+        if (user.getId() != editUser.getId()) {
+            userRepository.delete(editUser);
+            return false;
+        }
+        return true;
     }
 }

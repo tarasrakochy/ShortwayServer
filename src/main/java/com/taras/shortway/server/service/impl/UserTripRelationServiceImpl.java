@@ -5,6 +5,8 @@ import com.taras.shortway.server.entity.User;
 import com.taras.shortway.server.entity.UserTripRelation;
 import com.taras.shortway.server.entity.enums.UserStatus;
 import com.taras.shortway.server.repository.UserTripRelationRepository;
+import com.taras.shortway.server.service.TripService;
+import com.taras.shortway.server.service.UserService;
 import com.taras.shortway.server.service.UserTripRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,12 @@ public class UserTripRelationServiceImpl implements UserTripRelationService {
 
     @Autowired
     private UserTripRelationRepository userTripRelationRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private TripService tripService;
 
     @Override
     public List<Trip> getTripsForUser(int id, boolean isDriver) {
@@ -58,5 +66,29 @@ public class UserTripRelationServiceImpl implements UserTripRelationService {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean addTrip(Trip trip, int userId) {
+        UserTripRelation relation = new UserTripRelation();
+        relation.setFromPoint(trip.getFromPoint());
+        relation.setToPoint(trip.getToPoint());
+        relation.setUser(userService.getUserById(userId));
+        relation.setUserStatus(UserStatus.DRIVER);
+        relation.setTrip(trip);
+        UserTripRelation userTripRelation = userTripRelationRepository.saveAndFlush(relation);
+        return userTripRelation.getId() != 0;
+    }
+
+    @Override
+    public boolean acceptTrip(int userId, int tripId, String fromPoint, String toPoint) {
+        UserTripRelation relation = new UserTripRelation();
+        relation.setFromPoint(fromPoint);
+        relation.setToPoint(toPoint);
+        relation.setUser(userService.getUserById(userId));
+        relation.setUserStatus(UserStatus.PASSENGER);
+        relation.setTrip(tripService.getTripById(tripId));
+        UserTripRelation userTripRelation = userTripRelationRepository.saveAndFlush(relation);
+        return userTripRelation.getId() != 0;
     }
 }
