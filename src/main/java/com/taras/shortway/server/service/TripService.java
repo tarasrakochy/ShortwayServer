@@ -13,4 +13,6 @@ public interface TripService {
     List<User> getPassengersForTrip(int id);
 
     User getDriverForTrip(int id);
+
+    List<Trip> getTripsForCondition(Trip trip);
 }
