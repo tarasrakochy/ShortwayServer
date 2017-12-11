@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,11 +50,11 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public List<Trip> getTripsForCondition(Trip trip) {
+    public List<Trip> getTripsForCondition(Trip trip, int maxWaitTime) {
         List<Trip> trips = tripRepository.findAll();
         List<Trip> tripsAfterCurrentData = trips
                 .stream()
-                .filter(t -> t.getDate().compareTo(new Date()) >= 0)
+                .filter(t -> TimeUnit.MILLISECONDS.toMinutes(Math.abs(trip.getDate().getTime() - t.getDate().getTime())) <= maxWaitTime)
                 .filter(t -> t.getPassengersMaxCount() > userTripRelationService.getPassengersForTrip(t.getId()).size())
                 .collect(Collectors.toList());
 

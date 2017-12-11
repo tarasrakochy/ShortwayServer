@@ -36,8 +36,8 @@ public class TripController {
     }
 
     @RequestMapping(value = "/suitable", method = RequestMethod.POST)
-    public List<Trip> getTripsForConditions(@RequestBody Trip trip) {
-        return tripService.getTripsForCondition(trip);
+    public List<Trip> getTripsForConditions(@RequestBody Trip trip, @RequestParam int maxWaitTime) {
+        return tripService.getTripsForCondition(trip, maxWaitTime);
     }
 
     @RequestMapping(value = "/newtrip", method = RequestMethod.POST)

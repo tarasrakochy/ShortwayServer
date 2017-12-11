@@ -4,6 +4,7 @@ import com.taras.shortway.server.entity.Trip;
 import com.taras.shortway.server.entity.User;
 import com.taras.shortway.server.entity.UserTripRelation;
 import com.taras.shortway.server.entity.enums.UserStatus;
+import com.taras.shortway.server.repository.TripRepository;
 import com.taras.shortway.server.repository.UserTripRelationRepository;
 import com.taras.shortway.server.service.TripService;
 import com.taras.shortway.server.service.UserService;
@@ -26,6 +27,9 @@ public class UserTripRelationServiceImpl implements UserTripRelationService {
 
     @Autowired
     private TripService tripService;
+
+    @Autowired
+    private TripRepository tripRepository;
 
     @Override
     public List<Trip> getTripsForUser(int id, boolean isDriver) {
@@ -75,7 +79,8 @@ public class UserTripRelationServiceImpl implements UserTripRelationService {
         relation.setToPoint(trip.getToPoint());
         relation.setUser(userService.getUserById(userId));
         relation.setUserStatus(UserStatus.DRIVER);
-        relation.setTrip(trip);
+        Trip trip1 = tripRepository.save(trip);
+        relation.setTrip(trip1);
         UserTripRelation userTripRelation = userTripRelationRepository.save(relation);
         return userTripRelation.getId() != 0;
     }

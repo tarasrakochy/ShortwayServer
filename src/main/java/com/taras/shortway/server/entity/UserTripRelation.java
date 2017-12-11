@@ -25,11 +25,11 @@ public class UserTripRelation {
     @Enumerated(value = EnumType.STRING)
     private UserStatus userStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn
     private Trip trip;
 }

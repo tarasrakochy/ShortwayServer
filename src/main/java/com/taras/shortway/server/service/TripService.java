@@ -14,7 +14,7 @@ public interface TripService {
 
     User getDriverForTrip(int id);
 
-    List<Trip> getTripsForCondition(Trip trip);
+    List<Trip> getTripsForCondition(Trip trip, int maxWaitTime);
 
     boolean addTrip(Trip trip, int userId);
 
