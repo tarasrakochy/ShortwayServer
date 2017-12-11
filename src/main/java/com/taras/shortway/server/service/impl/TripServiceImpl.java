@@ -54,6 +54,7 @@ public class TripServiceImpl implements TripService {
         List<Trip> tripsAfterCurrentData = trips
                 .stream()
                 .filter(t -> t.getDate().compareTo(new Date()) >= 0)
+                .filter(t -> t.getPassengersMaxCount() > userTripRelationService.getPassengersForTrip(t.getId()).size())
                 .collect(Collectors.toList());
 
         return getSuitableTrips(tripsAfterCurrentData, trip);

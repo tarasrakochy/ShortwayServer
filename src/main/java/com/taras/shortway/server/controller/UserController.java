@@ -31,12 +31,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/newuser", method=RequestMethod.POST)
-    public boolean addUser(@RequestBody User user) {
+    public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.PUT)
-    public boolean editUser(@RequestBody User user) {
+    public User editUser(@RequestBody User user) {
         return userService.editUser(user);
     }
 }

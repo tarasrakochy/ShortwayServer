@@ -76,7 +76,7 @@ public class UserTripRelationServiceImpl implements UserTripRelationService {
         relation.setUser(userService.getUserById(userId));
         relation.setUserStatus(UserStatus.DRIVER);
         relation.setTrip(trip);
-        UserTripRelation userTripRelation = userTripRelationRepository.saveAndFlush(relation);
+        UserTripRelation userTripRelation = userTripRelationRepository.save(relation);
         return userTripRelation.getId() != 0;
     }
 
@@ -88,7 +88,7 @@ public class UserTripRelationServiceImpl implements UserTripRelationService {
         relation.setUser(userService.getUserById(userId));
         relation.setUserStatus(UserStatus.PASSENGER);
         relation.setTrip(tripService.getTripById(tripId));
-        UserTripRelation userTripRelation = userTripRelationRepository.saveAndFlush(relation);
+        UserTripRelation userTripRelation = userTripRelationRepository.save(relation);
         return userTripRelation.getId() != 0;
     }
 }

@@ -20,15 +20,17 @@ public class User {
     @Lob
     private byte[] avatar;
 
+    private String name;
+
+    private String surname;
+
     private String phone;
+
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private LoginPass loginPass;
 
-    @OneToOne
-    private Auto auto;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private UserInfo userInfo;
 }

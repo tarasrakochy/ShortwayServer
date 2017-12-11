@@ -53,18 +53,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addUser(User user) {
-        User newUser = userRepository.saveAndFlush(user);
-        return newUser.getId() != 0;
+    public User addUser(User user) {
+        User newUser = userRepository.save(user);
+        return newUser;
     }
 
     @Override
-    public boolean editUser(User user) {
-        User editUser = userRepository.saveAndFlush(user);
+    public User editUser(User user) {
+        User editUser = userRepository.save(user);
         if (user.getId() != editUser.getId()) {
             userRepository.delete(editUser);
-            return false;
+            return null;
         }
-        return true;
+        return editUser;
     }
 }

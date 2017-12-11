@@ -14,7 +14,7 @@ public interface UserService {
 
     List<Trip> getTripsForUser(int id, boolean isDriver);
 
-    boolean addUser(User user);
+    User addUser(User user);
 
-    boolean editUser(User user);
+    User editUser(User user);
 }

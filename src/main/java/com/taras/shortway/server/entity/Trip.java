@@ -23,11 +23,12 @@ public class Trip {
     private String fromPoint;
     private String toPoint;
 
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    private int passengersMaxCount;
 
-    @Temporal(TemporalType.TIME)
-    private Date time;
+    private int price;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "transitional")
